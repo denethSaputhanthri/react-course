@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
@@ -8,13 +8,13 @@ export default function Auth() {
   const [mode, setMode] = useState("login");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { SignUp, Login } =useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { SignUp, Login , Logout} =useContext(AuthContext);
 
   function onSubmit(data) {
     setError(null);
@@ -43,7 +43,7 @@ export default function Auth() {
               {mode === "signup" ? "Sign Up" : "Login"}
             </h1>
             <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
-                {error && <div className="error-message">{error}</div>} 
+                {/* {error && <div className="error-message">{error}</div>}  */}
               <div className="form-group">
                 <label className="form-label" htmlFor="email">
                   Email
